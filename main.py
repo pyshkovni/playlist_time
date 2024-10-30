@@ -35,4 +35,11 @@ playlist_b = {
     'Салют, Вера': 4.44,
     'Улетаю': 3.24,
     'Опять метель': 3.37,
-    }
+}
+
+def get_duration(playlist):
+    return playlist.items()
+
+print(get_duration(playlist_b))
+
+
