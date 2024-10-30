@@ -17,6 +17,7 @@
 # При этом функций в задаче может быть несколько. То есть решение можно разбить на несколько функций.
 # Но результат задачи можно получить вызвав одну функцию!
 # get_duration(playlist: Iterable, n: int) -> Any
+import random 
 
 playlist_d = [
     ("The Flute Tune", "Voodoo People", "Galvanize", "Miami Disco", "Komarovo", "Wild Frontier", "Check It Out", "Seasons", "These Things Will Come To Be"),
@@ -37,8 +38,13 @@ playlist_b = {
     'Опять метель': 3.37,
     }
 
-def get_duration(playlist):
-    return playlist.items()
+def get_random_songs(playlist, n):
+    merge_playlist = list(zip(playlist_d[0], playlist_d[1]))
+    random.shuffle(merge_playlist)
+    return merge_playlist[:n]
 
-print(get_duration(playlist_b))
+print(get_random_songs(playlist_b, 3))
+
+
+
 
