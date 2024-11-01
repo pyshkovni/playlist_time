@@ -43,9 +43,18 @@ def get_random_songs(playlist, n):
     random.shuffle(merge_playlist)
     return merge_playlist[:n]
 
-print(get_random_songs(playlist_b, 3))
+# print(get_random_songs(playlist_b, 3))
 
+def get_duration(playlist, n):
+    counter = 0
+    songs = get_random_songs(playlist, n)
+    
+    for i in range(len(songs)):
+        counter += songs[i][1]
+    return counter
 
+n = 3
+print(get_duration(playlist_d, n))
 
 
 
