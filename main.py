@@ -56,4 +56,6 @@ def get_duration(playlist, n):
 n = 3
 print(get_duration(playlist_d, n))
 print(1+1)
+print(1+1)
+
 
