@@ -19,6 +19,10 @@
 # get_duration(playlist: Iterable, n: int) -> Any
 import random 
 
+import random 
+from datetime import timedelta
+from decimal import Decimal, ROUND_HALF_DOWN
+
 playlist_d = [
     ("The Flute Tune", "Voodoo People", "Galvanize", "Miami Disco", "Komarovo", "Wild Frontier", "Check It Out", "Seasons", "These Things Will Come To Be"),
     (5.23, 5.07, 7.34, 4.31, 2.26, 4.28, 2.09, 4.25, 4.56),
@@ -38,24 +42,30 @@ playlist_b = {
     'Опять метель': 3.37,
 }
 
-def get_random_songs(playlist, n):
-    merge_playlist = list(zip(playlist_d[0], playlist_d[1]))
-    random.shuffle(merge_playlist)
-    return merge_playlist[:n]
+def _get_random_songs(playlist, n) -> dict:
+    if isinstance(playlist, list):
+        songs = list(zip(playlist[0], playlist[1]))
+    elif isinstance(playlist, dict):
+        songs = list(playlist.items())
+        
+    random.shuffle(songs)
+    return dict(songs[:n])
 
-# print(get_random_songs(playlist_b, 3))
-
-def get_duration(playlist, n):
-    counter = 0
-    songs = get_random_songs(playlist, n)
-    
-    for i in range(len(songs)):
-        counter += songs[i][1]
-    return counter
-
-n = 3
-print(get_duration(playlist_d, n))
-print(1+1)
-print(1+1)
+# print(_get_random_songs(playlist_b, 3))
 
 
+def get_duration(playlist: list|dict, n) -> timedelta:
+
+    song_list = _get_random_songs(playlist, n)
+    total_time = timedelta()
+
+    for song, duration in song_list.items():
+        round_time = Decimal(duration).quantize(Decimal("1.00"), ROUND_HALF_DOWN)
+        _min, _sec = str(round_time).split(".")
+        res = timedelta(minutes=int(_min), seconds=int(_sec))
+        total_time += res
+
+    return total_time
+
+a = get_duration(playlist_d, 6)
+print(a)
