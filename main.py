@@ -43,6 +43,9 @@ playlist_b = {
 }
 
 def _get_random_songs(playlist, n) -> dict:
+    """
+    TODO - описать документацию (по аналогии с функцией ниже)
+    """
     if isinstance(playlist, list):
         songs = list(zip(playlist[0], playlist[1]))
     elif isinstance(playlist, dict):
@@ -54,8 +57,16 @@ def _get_random_songs(playlist, n) -> dict:
 # print(_get_random_songs(playlist_b, 3))
 
 
-def get_duration(playlist: list|dict, n) -> timedelta:
+def get_duration(playlist: list|dict, n: int) -> timedelta:
+    """
+    Функция принимает плейлист с песнями и временем звучания в виде коллекции и возвращает время звучания
 
+    :param n: количество песен
+    :type n: int
+
+    :return: время звучания
+    :rtype: timedelta
+    """
     song_list = _get_random_songs(playlist, n)
     total_time = timedelta()
 
@@ -68,4 +79,5 @@ def get_duration(playlist: list|dict, n) -> timedelta:
     return total_time
 
 a = get_duration(playlist_d, 6)
-print(a)
+b = get_duration(playlist_b, 3)
+print(a, b)
